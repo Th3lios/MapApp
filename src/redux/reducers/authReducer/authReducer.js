@@ -5,7 +5,7 @@ const initialState = {
   currUser: undefined,
 };
 
-const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_AUTHENTICATION:
       return {
@@ -17,5 +17,3 @@ const authReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default authReducer;

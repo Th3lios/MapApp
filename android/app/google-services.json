@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "519746032254",
+    "project_id": "mapapp-70ea6",
+    "storage_bucket": "mapapp-70ea6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519746032254:android:9bdd2a763cec42757a7e2f",
+        "android_client_info": {
+          "package_name": "com.mapapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519746032254-80qb45ooqho6j3sojlie5germ6hn47u7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRH4VQc2iX7h-ChWM7Ze4S2vAWAHBHHEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519746032254-80qb45ooqho6j3sojlie5germ6hn47u7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "519746032254-est6fp4vq6u6kiqb6gbolk6a3aepr22f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.test.MapApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
