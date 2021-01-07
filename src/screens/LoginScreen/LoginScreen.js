@@ -10,29 +10,32 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {login} from '../../../store/actions/authAction';
+import {login} from '../../redux/actions/authAction/authAction';
 import styles from './LoginScreenStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 Icon.loadFont();
 //import { getUsers, login } from '../../firebase/Firebase'
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const LoginScreen = (props) => {
+const LoginScreen = () => {
+  const dispatch = useDispatch();
   const inputPass = useRef(null);
-  const [emailState, setEmailState] = useState({
+  const [seePasswordState, setSeePasswordState] = useState(true);
+  const [account, setAccount] = useState({
     email: '',
-  });
-  const [passwordState, setPasswordState] = useState({
     password: '',
   });
-  const [seePasswordState, setSeePasswordState] = useState(true);
-
-  const dispatch = useDispatch();
 
   const loginHandle = () => {
-    dispatch(login(emailState.email.toLowerCase(), passwordState.password));
+    if (account.email === '' || account.password === '') {
+      Alert.alert('Los campos no pueden estar vacíos');
+    } else {
+      console.log(account);
+      dispatch(login(account.email.toLowerCase(), account.password));
+    }
   };
 
   return (
@@ -57,7 +60,7 @@ const LoginScreen = (props) => {
                 <View style={styles.middle}>
                   <View style={styles.logo}>
                     <Image
-                      source={require('../../../assets/images/instagram.png')}
+                      source={require('../../assets/instagram.png')}
                       style={styles.image}
                     />
                   </View>
@@ -68,7 +71,12 @@ const LoginScreen = (props) => {
                       placeholderTextColor="rgba(0,0,0,0.5)"
                       keyboardType="email-address"
                       underlineColorAndroid="transparent"
-                      onChangeText={(email) => setEmailState({email})}
+                      onChangeText={(email) =>
+                        setAccount({
+                          ...account,
+                          email: email,
+                        })
+                      }
                     />
                     <View style={styles.passwordContainer}>
                       <TextInput
@@ -79,7 +87,10 @@ const LoginScreen = (props) => {
                         secureTextEntry={seePasswordState}
                         underlineColorAndroid="transparent"
                         onChangeText={(password) =>
-                          setPasswordState({password})
+                          setAccount({
+                            ...account,
+                            password: password,
+                          })
                         }
                       />
                       <TouchableOpacity
@@ -96,7 +107,9 @@ const LoginScreen = (props) => {
                     </View>
                   </View>
                   <View style={styles.loginButton}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={loginHandle}>
                       <Text style={styles.textButton}>Log In</Text>
                     </TouchableOpacity>
                   </View>
