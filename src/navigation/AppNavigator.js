@@ -16,7 +16,7 @@ const AppNavigator = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Login"
+            name="Map"
             component={MapScreen}
             options={{headerShown: false}}
           />

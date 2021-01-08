@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/actions/authAction/authAction';
+
 const MapScreen = () => {
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logout());
+  };
   return (
-    <View>
-      <Text>Welcome</Text>
-    </View>
+    <TouchableOpacity onPress={logOut}>
+      <Text>Log Out </Text>
+    </TouchableOpacity>
   );
 };
 

@@ -7,6 +7,7 @@ import {
 } from '../../reducers/feedbackReducer/feedbackReducer';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOG_OUT = 'LOG_OUT';
 
 export const login = (email, password) => {
   return (dispatch) => {
@@ -36,6 +37,6 @@ export const logout = () => {
       .auth()
       .signOut()
       .then(() => {
-        dispatch({type: 'LOG_OUT'});
+        dispatch({type: LOG_OUT, data: false});
       });
 };
