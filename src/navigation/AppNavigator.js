@@ -6,6 +6,7 @@ const Stack = createStackNavigator();
 
 // screens
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen/RegisterScreen';
 import MapScreen from '../screens/MapScreen/MapScreen';
 
 const AppNavigator = () => {
@@ -30,6 +31,11 @@ const AppNavigator = () => {
           <Stack.Screen
             name="Login"
             component={LoginScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
             options={{headerShown: false}}
           />
         </Stack.Navigator>

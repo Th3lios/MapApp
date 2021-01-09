@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist';
 
 // reducers
+import {feedbackReducer} from './feedbackReducer/feedbackReducer';
 import {authReducer} from './authReducer/authReducer';
 
 export default combineReducers({
@@ -12,5 +13,12 @@ export default combineReducers({
       storage: AsyncStorage,
     },
     authReducer,
+  ),
+  feed: persistReducer(
+    {
+      key: 'feed',
+      storage: AsyncStorage,
+    },
+    feedbackReducer,
   ),
 });

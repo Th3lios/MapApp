@@ -1,28 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  PermissionsAndroid,
-  Platform,
-} from 'react-native';
+import firebase from '@react-native-firebase/app';
+import {homeAnalytics, changeLocationAnalytics} from '../../utils/analytics';
+import {View, Text, TouchableOpacity, Platform} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {logout} from '../../redux/actions/authAction/authAction';
-import MapView, {Marker} from 'react-native-maps';
+import {signOut} from '../../redux/actions/authAction/authAction';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Geolocation from 'react-native-geolocation-service';
 import Search from '../../components/Search/Search';
+import {useSelector} from 'react-redux';
+import {requestLocationPermission} from '../../utils/permissions';
+import styles from '../MapScreen/MapScreenStyle';
 Icon.loadFont();
-const {width, height} = Dimensions.get('screen');
 const MapScreen = () => {
   const dispatch = useDispatch();
+  const user_id = useSelector((state) => state.auth.user_id);
   const [region, setRegion] = useState(null);
-  const [destination, setDestination] = useState(null);
-
+  const [initialLocation, setInitialLocation] = useState(null);
   useEffect(() => {
-    getLocation();
+    setInitialLocation(true);
+    homeAnalytics(user_id);
+    Platform.OS === 'android'
+      ? requestLocationPermission().then((response) => {
+          console.log(response);
+          if (response === 'granted') {
+            getLocation();
+          }
+        })
+      : getLocation();
   }, []);
 
   const getLocation = async () => {
@@ -47,6 +52,7 @@ const MapScreen = () => {
   };
 
   const handleLocationSelected = (data, {geometry}) => {
+    setInitialLocation(false);
     const {
       location: {lat: latitude, lng: longitude},
     } = geometry;
@@ -58,10 +64,11 @@ const MapScreen = () => {
       title: data.structured_formatting.main_text,
     });
     console.log(data);
+    changeLocationAnalytics(data.description);
   };
 
   const logOut = () => {
-    dispatch(logout());
+    dispatch(signOut());
   };
 
   return (
@@ -71,8 +78,14 @@ const MapScreen = () => {
         showsUserLocation
         loadingEnable
         followUserLocation
+        provider={PROVIDER_GOOGLE}
         style={styles.map}>
-        {region && <Marker coordinate={region} />}
+        {region && !initialLocation && (
+          <Marker
+            image={require('../../assets/images/home.png')}
+            coordinate={region}
+          />
+        )}
       </MapView>
       <TouchableOpacity onPress={logOut} style={styles.button}>
         <View style={styles.logOutWrapper}>
@@ -84,49 +97,5 @@ const MapScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  logOutWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'rgba(255,255,255,0.8)',
-    borderRadius: 2,
-    position: 'absolute',
-    bottom: Platform.select({ios: 40, android: 10}),
-    right: Platform.select({ios: 10, android: 10}),
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // ios
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 15,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 9.51,
-    // android
-    //elevation: 1,
-  },
-  text: {
-    color: 'rgba(1,1,1,0.5)',
-    fontWeight: '700',
-  },
-  map: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    height: height,
-    width: width,
-  },
-});
 
 export default MapScreen;

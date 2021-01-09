@@ -3,11 +3,17 @@ import {
   SHOW_MESSAGE,
   SHOW_MESSAGE_BY_CODE,
   VIEW_IS_LOADING,
-} from '../reducers/generalReducer';
+  SHOW_LOADING,
+} from '../../reducers/feedbackReducer/feedbackReducer';
 
 export function showMessage(message) {
   return (dispatch) => dispatch({type: SHOW_MESSAGE, data: message});
 }
+
+export function showLoading() {
+  return (dispatch) => dispatch({type: SHOW_LOADING, data: true});
+}
+
 export function showMessageByCode(messageCode) {
   return (dispatch) =>
     dispatch({type: SHOW_MESSAGE_BY_CODE, data: messageCode});

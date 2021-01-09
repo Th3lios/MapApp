@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   Text,
   View,
@@ -13,37 +13,35 @@ import {
   Alert,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {signIn} from '../../redux/actions/authAction/authAction';
+import {signUp} from '../../redux/actions/authAction/authAction';
 import Loading from '../../components/Modal/Loading';
-import styles from './LoginScreenStyles';
+import styles from './RegisterScreenStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 Icon.loadFont();
 //import { getUsers, login } from '../../firebase/Firebase'
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const LoginScreen = (props) => {
+const RegisterScreen = (props) => {
   const dispatch = useDispatch();
   const inputPass = useRef(null);
   const loading = useSelector((state) => state.feed.loading);
-  const message = useSelector((state) => state.feed.message);
   const [seePasswordState, setSeePasswordState] = useState(true);
   const [account, setAccount] = useState({
+    username: '',
     email: '',
     password: '',
   });
 
-  useEffect(() => {
-    if (message !== undefined) {
-      Alert.alert(message.title, message.text);
-    }
-  }, [message]);
-
   const loginHandle = () => {
-    if (account.email === '' || account.password === '') {
-      Alert.alert('Fields cannot be empty');
+    if (
+      (account.email === '', account.email === '' || account.password === '')
+    ) {
+      Alert.alert('Los campos no pueden estar vacíos');
     } else {
       console.log(account);
-      dispatch(signIn(account.email.toLowerCase(), account.password));
+      dispatch(
+        signUp(account.username, account.email.toLowerCase(), account.password),
+      );
     }
   };
 
@@ -63,7 +61,7 @@ const LoginScreen = (props) => {
             <TouchableWithoutFeedback>
               <View style={styles.section}>
                 <View style={styles.top}>
-                  <Text style={styles.language}>E.A.D</Text>
+                  <Text style={styles.language} />
                 </View>
 
                 <View style={styles.middle}>
@@ -74,6 +72,18 @@ const LoginScreen = (props) => {
                     />
                   </View>
                   <View style={styles.inputsContainer}>
+                    <TextInput
+                      style={styles.inputEmail}
+                      placeholder="Username"
+                      placeholderTextColor="rgba(0,0,0,0.5)"
+                      underlineColorAndroid="transparent"
+                      onChangeText={(username) =>
+                        setAccount({
+                          ...account,
+                          username: username,
+                        })
+                      }
+                    />
                     <TextInput
                       style={styles.inputEmail}
                       placeholder="Email"
@@ -115,27 +125,21 @@ const LoginScreen = (props) => {
                       </TouchableOpacity>
                     </View>
                   </View>
-                  <View style={styles.loginButton}>
+                  <View style={styles.button}>
                     <TouchableOpacity
-                      style={styles.button}
+                      style={styles.registerButton}
                       onPress={loginHandle}>
-                      <Text style={styles.textButton}>Log In</Text>
+                      <Text style={styles.textRegisterButton}>Sign up</Text>
                     </TouchableOpacity>
-                  </View>
-                  <View style={styles.forgotPass}>
-                    <Text style={styles.forgotText}>
-                      Forgot your login details?{' '}
-                      <Text style={styles.bold}>We can't help you :(.</Text>
-                    </Text>
                   </View>
                 </View>
 
                 <View style={styles.bottom}>
                   <Text style={styles.bottomText}>
-                    Don't have an account?{' '}
+                    Already have an account?
                     <TouchableWithoutFeedback
-                      onPress={() => props.navigation.navigate('Register')}>
-                      <Text style={styles.bold}>Sign up.</Text>
+                      onPress={() => props.navigation.goBack()}>
+                      <Text style={styles.bold}> Sign in.</Text>
                     </TouchableWithoutFeedback>
                   </Text>
                 </View>
@@ -149,4 +153,4 @@ const LoginScreen = (props) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

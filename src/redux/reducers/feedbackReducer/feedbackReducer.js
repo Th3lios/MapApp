@@ -8,9 +8,10 @@ const initialState = {
   loading: false,
   scrollIsLoading: false,
   viewLoading: true,
+  message: undefined,
 };
 
-const feedbackReducer = (state = initialState, action) => {
+export const feedbackReducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_LOADING:
       console.log('[messagesReducer::SHOW_LOADING] action.data: ', action.data);
@@ -44,5 +45,3 @@ const feedbackReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default feedbackReducer;
