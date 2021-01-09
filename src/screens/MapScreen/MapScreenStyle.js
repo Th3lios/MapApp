@@ -31,6 +31,27 @@ const styles = StyleSheet.create({
     // android
     //elevation: 1,
   },
+  locationButton: {
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    borderRadius: 2,
+    position: 'absolute',
+    bottom: Platform.select({ios: 100, android: 80}),
+    right: Platform.select({ios: 10, android: 10}),
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // ios
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 15,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 9.51,
+    // android
+    //elevation: 1,
+  },
   text: {
     color: 'rgba(1,1,1,0.5)',
     fontWeight: '700',

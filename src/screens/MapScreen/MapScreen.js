@@ -87,6 +87,12 @@ const MapScreen = () => {
           />
         )}
       </MapView>
+      
+      <TouchableOpacity onPress={getLocation} style={styles.locationButton}>
+        <View style={styles.locationWrapper}>
+          <Icon name="location" size={20} color="rgba(1,1,1,0.5)" />
+        </View>
+      </TouchableOpacity>
       <TouchableOpacity onPress={logOut} style={styles.button}>
         <View style={styles.logOutWrapper}>
           <Icon name="log-out" size={20} color="rgba(1,1,1,0.5)" />
