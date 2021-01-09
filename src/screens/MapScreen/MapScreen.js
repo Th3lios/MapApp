@@ -10,88 +10,54 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/actions/authAction/authAction';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Geolocation from 'react-native-geolocation-service';
+import Search from '../../components/Search/Search';
 Icon.loadFont();
 const {width, height} = Dimensions.get('screen');
 const MapScreen = () => {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
+  const [region, setRegion] = useState(null);
+  const [destination, setDestination] = useState(null);
 
   useEffect(() => {
-    requestPermission();
+    getLocation();
   }, []);
 
-  const requestPermission = async () => {
-    if (Platform.OS === 'ios') {
-      Geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          setLocation({
-            latitude: latitude,
-            longitude: longitude,
-          });
-          console.log(position);
-        },
-        (error) => {
-          // See error code charts below.
-          console.log(error.code, error.message);
-        },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-      );
-    }
-
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'ReactNativeCode Location Permission',
-          message: 'ReactNativeCode App needs access to your location ',
-        },
-      );
-      if (granted) {
-        Geolocation.getCurrentPosition(
-          (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            setLocation({
-              latitude: latitude,
-              longitude: longitude,
-            });
-            console.log(position);
-          },
-          (error) => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-          },
-          {enableHighAccuracy: false, timeout: 30000},
-        );
-      }
-    }
-  };
-
-  const findMyLocation = () => {
+  const getLocation = async () => {
     Geolocation.getCurrentPosition(
-      (position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        setLocation({
-          latitude: latitude,
-          longitude: longitude,
+      ({coords: {latitude, longitude}}) => {
+        setRegion({
+          latitude,
+          longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
         });
-        console.log(position, Location);
       },
       (error) => {
-        // See error code charts below.
         console.log(error.code, error.message);
       },
-      {enableHighAccuracy: false, timeout: 30000},
+      {
+        timeout: 2000,
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+      },
     );
+  };
+
+  const handleLocationSelected = (data, {geometry}) => {
+    const {
+      location: {lat: latitude, lng: longitude},
+    } = geometry;
+    setRegion({
+      latitude,
+      longitude,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+      title: data.structured_formatting.main_text,
+    });
+    console.log(data);
   };
 
   const logOut = () => {
@@ -101,26 +67,20 @@ const MapScreen = () => {
   return (
     <View style={styles.container}>
       <MapView
-        initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        style={styles.map}
-      />
+        region={region}
+        showsUserLocation
+        loadingEnable
+        followUserLocation
+        style={styles.map}>
+        {region && <Marker coordinate={region} />}
+      </MapView>
       <TouchableOpacity onPress={logOut} style={styles.button}>
         <View style={styles.logOutWrapper}>
-          <Icon name="log-out" size={20} color="white" />
+          <Icon name="log-out" size={20} color="rgba(1,1,1,0.5)" />
           <Text style={styles.text}>Logout </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={findMyLocation} style={styles.myLocation}>
-        <View style={styles.logOutWrapper}>
-          <Icon name="compass-outline" size={24} color="white" />
-          <Text style={styles.text} />
-        </View>
-      </TouchableOpacity>
+      <Search onLocationSelected={handleLocationSelected} />
     </View>
   );
 };
@@ -136,18 +96,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: '#3333',
-    borderRadius: 10,
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    borderRadius: 2,
     position: 'absolute',
-    top: 20,
-    right: 20,
+    bottom: Platform.select({ios: 40, android: 10}),
+    right: Platform.select({ios: 10, android: 10}),
     paddingHorizontal: 10,
     paddingVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    // ios
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 15,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 9.51,
+    // android
+    //elevation: 1,
   },
   text: {
-    color: 'white',
+    color: 'rgba(1,1,1,0.5)',
     fontWeight: '700',
   },
   map: {
@@ -156,17 +126,6 @@ const styles = StyleSheet.create({
     top: 0,
     height: height,
     width: width,
-  },
-  myLocation: {
-    backgroundColor: '#3333',
-    borderRadius: 24,
-    position: 'absolute',
-    bottom: 50,
-    right: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
