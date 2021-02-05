@@ -6,7 +6,7 @@
 
 #import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
-
+#import <ReactNativeConfig/ReactNativeConfig.h>
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>

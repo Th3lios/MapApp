@@ -12,7 +12,6 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import {GOOGLE_MAPS_API_KEY} from '../../config/config';
 import {useDispatch, useSelector} from 'react-redux';
 import {signIn} from '../../redux/actions/authAction/authAction';
 import Loading from '../../components/Modal/Loading';
@@ -64,7 +63,7 @@ const LoginScreen = (props) => {
             <TouchableWithoutFeedback>
               <View style={styles.section}>
                 <View style={styles.top}>
-                  <Text style={styles.language}>E.A.D {GOOGLE_MAPS_API_KEY}</Text>
+                  <Text style={styles.language}>E.A.D</Text>
                 </View>
 
                 <View style={styles.middle}>
