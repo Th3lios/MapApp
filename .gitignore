@@ -31,7 +31,6 @@ local.properties
 
 # node.js
 #
-.env
 .env.production
 .env.staging
 node_modules/
