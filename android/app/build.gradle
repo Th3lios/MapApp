@@ -81,6 +81,13 @@ project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
 
+project.ext.envConfigFiles = [
+        debug: ".env",
+        release: ".env",
+        stagingrelease: ".env.staging",
+        productionrelease: ".env.production"
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -163,6 +170,12 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        stagingrelease {
+            initWith release
+        }
+        productionrelease {
+            initWith release
+        }
     }
 
     // applicationVariants are e.g. debug, release
@@ -189,6 +202,7 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation project(':react-native-maps')
+    implementation project(':react-native-config')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
@@ -221,4 +235,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 

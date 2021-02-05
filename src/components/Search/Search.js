@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Platform, Dimensions} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-
+import {GOOGLE_MAPS_API_KEY} from "../../config/config";
 const {width, height} = Dimensions.get('screen');
 const Search = ({onLocationSelected}) => {
   return (
@@ -10,7 +10,7 @@ const Search = ({onLocationSelected}) => {
       placeholderTextColor="#333"
       onPress={onLocationSelected}
       query={{
-        key: 'GOOGLE MAPS API KEY',
+        key: GOOGLE_MAPS_API_KEY,
         language: 'en',
       }}
       textInputProps={{
