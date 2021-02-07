@@ -9,19 +9,26 @@ el Maps SDK for Android, Maps SDK for iOS y Places API. También se
 recomienda tener instalado java 11
 
 1. Clonar repositorio en un ambiente local
-2. Crear archivo en la carpeta android llamado local.properties y agregar la ruta del android sdk: 
+2. Crear archivo en la carpeta android llamado local.properties y agregar la ruta del android sdk. Por ejemplo: 
     ```sh
-    $ sdk.dir=$HOME/Library/Android/sdk
+    $ sdk.dir=/Users/username/Library/Android/sdk
     ```
-2. Instalar dependencias ingresando a la carpeta del proyecto y ejecutar el comando 
+3. Dar los permisos al archivo gradlew:
+    ```sh
+    $ chmod -x android/gradlew
+    ```
+4. Instalar dependencias ingresando a la carpeta del proyecto y ejecutar el comando 
     ```sh
     $ npm install
     $ cd ios / pod install
     ```
-    
-3. Agregar la API KEY de google maps en las variables de entorno (archivo .env)
-
-4. Ejecutar proyecto:
+5. Agregar la API KEY de google maps en las variables de entorno (archivo .env)
+6. Añadir los archivos correspondientes de firebase:
+    ```sh
+    $ google-services.json (android)
+    $ GoogleService-Info.plits (ios)
+    ```
+6. Ejecutar proyecto:
     ```sh
     $ npx react-native run-android
     $ npx react-native run-ios --simulator='iPhone X'

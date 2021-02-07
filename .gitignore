@@ -29,6 +29,10 @@ build/
 local.properties
 *.iml
 
+# Android/app
+#
+google-services.json
+
 # node.js
 #
 .env.production
