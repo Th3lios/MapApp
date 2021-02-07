@@ -6,7 +6,7 @@
 
 #import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import <ReactNativeConfig/ReactNativeConfig.h>
+#import <ReactNativeConfig.h>
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -30,7 +30,8 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"GOOGLE MAPS API KEY"];
+  NSString *mapsApiKey = [ReactNativeConfig envFor:@"GOOGLE_MAPS_API_KEY"];
+  [GMSServices provideAPIKey: mapsApiKey];
   
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
