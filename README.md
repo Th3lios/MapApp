@@ -9,7 +9,7 @@ el Maps SDK for Android, Maps SDK for iOS y Places API. También se
 recomienda tener instalado java 11
 
 1. Clonar repositorio en un ambiente local
-2. Crear archivo en android llamado local.properties agregar la ruta del android sdk: 
+2. Crear archivo en la carpeta android llamado local.properties y agregar la ruta del android sdk: 
     ```sh
     $ sdk.dir=$HOME/Library/Android/sdk
     ```
