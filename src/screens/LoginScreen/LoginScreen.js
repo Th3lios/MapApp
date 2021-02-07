@@ -51,7 +51,10 @@ const LoginScreen = (props) => {
     <>
       <SafeAreaView style={{flex: 0, backgroundColor: 'black'}} />
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.content}>
+      <SafeAreaView style={styles.content}
+        testID='app-root'
+        accessibilityLabel='app-root'
+      >
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : ''}>
@@ -134,6 +137,8 @@ const LoginScreen = (props) => {
                   <Text style={styles.bottomText}>
                     Don't have an account?{' '}
                     <TouchableWithoutFeedback
+                      testID='register-button'
+                      accessibilityLabel='register-button'
                       onPress={() => props.navigation.navigate('Register')}>
                       <Text style={styles.bold}>Sign up.</Text>
                     </TouchableWithoutFeedback>
