@@ -23,6 +23,10 @@ recomienda tener instalado java 11
     $ cd ios / pod install
     ```
 5. Agregar la API KEY de google maps en las variables de entorno (archivo .env)
+    ```sh
+    $ // .env
+    $ GOOGLE_MAPS_API_KEY=
+    ```
 6. Añadir los archivos correspondientes de firebase:
     ```sh
     $ google-services.json (android)
