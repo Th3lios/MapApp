@@ -16,7 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* MapAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MapAppTests.m */; };
-		38F1F3F825CF631F009968EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F1F3F725CF631F009968EC /* GoogleService-Info.plist */; };
+		38F1F40225CF7700009968EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F1F40125CF7700009968EC /* GoogleService-Info.plist */; };
 		4FC7752EF3C284CC332D0620 /* libPods-MapApp-MapAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C570FF14AF38042C85B6EA23 /* libPods-MapApp-MapAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		82BDD1353C0A84C86F897892 /* libPods-MapApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA1E24DD8E1B7E22E1A3EEE /* libPods-MapApp-tvOSTests.a */; };
@@ -54,7 +54,7 @@
 		24C5CEBC555C80DBC4028E51 /* libPods-MapApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MapApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* MapApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MapApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* MapApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MapApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		38F1F3F725CF631F009968EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "MapApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		38F1F40125CF7700009968EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Users/eliasaraya/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B2624DA0FB1262F1BC6ED19 /* libPods-MapApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MapApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9E2424F9C9A777DF012F34 /* Pods-MapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapApp.release.xcconfig"; path = "Target Support Files/Pods-MapApp/Pods-MapApp.release.xcconfig"; sourceTree = "<group>"; };
 		7226B690166BE99E5065BF56 /* Pods-MapApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-MapApp-tvOSTests/Pods-MapApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		13B07FAE1A68108700A75B9A /* MapApp */ = {
 			isa = PBXGroup;
 			children = (
-				38F1F3F725CF631F009968EC /* GoogleService-Info.plist */,
+				38F1F40125CF7700009968EC /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -343,8 +343,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				38F1F3F825CF631F009968EC /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				38F1F40225CF7700009968EC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
