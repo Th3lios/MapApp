@@ -14,12 +14,10 @@ el Maps SDK for Android, Maps SDK for iOS y Places API
     $ cd ios / pod install
     ```
     
-3. Agregar la API KEY de google maps en las siguientes partes del proyecto:
-    * MapApp/android/app/src/main/AndroidManifest (Linea 19)
-    * MapApp/src/components/Search/Search (Linea 13)
-    * (IOS) para añadir la API KEY en ios se debe ingresar a Xcode, luego 
-      desde Xcode, seleccionar abrir/open y buscar el archivo MapApp.xcworkspace 
-      en la carpeta ios del proyecto, luego abrir el archivo AppDelegate.m en la
-      barra lateral izquierda y añadir la API KEY en la Linea 33
-4. Ejecutar proyecto, en mi caso ocupo el compando npx react-native run-android y
-   para ios, npx react-native run-ios --simulator='iPhone X'
+3. Agregar la API KEY de google maps en las variables de entorno (archivo .env)
+
+4. Ejecutar proyecto:
+    ```sh
+    $ npx react-native run-android
+    $ npx react-native run-ios --simulator='iPhone X'
+    ```
