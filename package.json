@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@babel/preset-env": "^7.12.13",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/analytics": "^10.4.1",
@@ -21,6 +22,7 @@
     "appcenter": "4.0.2",
     "appcenter-analytics": "4.0.2",
     "appcenter-crashes": "4.0.2",
+    "appium": "^1.20.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-config": "^1.4.2",
@@ -36,7 +38,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "wd": "^1.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
