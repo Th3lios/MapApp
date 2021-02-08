@@ -121,7 +121,10 @@ const LoginScreen = (props) => {
                   <View style={styles.loginButton}>
                     <TouchableOpacity
                       style={styles.button}
-                      onPress={loginHandle}>
+                      onPress={loginHandle}
+                      testID='login-button'
+                      accessibilityLabel='login-button'
+                      >
                       <Text style={styles.textButton}>Log In</Text>
                     </TouchableOpacity>
                   </View>
@@ -136,12 +139,13 @@ const LoginScreen = (props) => {
                 <View style={styles.bottom}>
                   <Text style={styles.bottomText}>
                     Don't have an account?{' '}
-                    <TouchableWithoutFeedback
+                    <TouchableOpacity
+                      onPress={() => props.navigation.navigate('Register')}
                       testID='register-button'
                       accessibilityLabel='register-button'
-                      onPress={() => props.navigation.navigate('Register')}>
-                      <Text style={styles.bold}>Sign up.</Text>
-                    </TouchableWithoutFeedback>
+                      style={styles.bold}>
+                      <Text>Sign up.</Text>
+                    </TouchableOpacity>
                   </Text>
                 </View>
               </View>
