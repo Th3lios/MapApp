@@ -1,14 +1,13 @@
 module.exports = {
   presets: [
-    [
-      "@babel/preset-env",
+      "module:metro-react-native-babel-preset",
+      ["@babel/preset-env",
       {
         "targets": {
           "node": true
         }
-      }
-    ]
-    ,'module:metro-react-native-babel-preset'],
+      }]
+    ],
   
   plugins: [
     ["module-resolver", {
@@ -27,15 +26,3 @@ module.exports = {
     }]
   ]
 };
-
-module.exports = {
-  presets: [[
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": true
-        }
-      }
-    ]
-  ]
-}
